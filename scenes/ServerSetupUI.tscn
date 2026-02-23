@@ -1,0 +1,95 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4x1y1y1y1y1y"]
+[ext_resource type="Script" path="res://scripts/ServerSetupUI.cs" id="1_setup"]
+
+[node name="ServerSetupUI" type="Window"]
+script = ExtResource("1_setup")
+title = "Setup New Server"
+initial_position = 2
+size = Vector2i(500, 400)
+visible = false
+exclusive = true
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Create a new Project Zomboid Dedicated Server"
+horizontal_alignment = 1
+
+[node name="NameInput" type="LineEdit" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Server Name (e.g. MySurvivalServer)"
+
+[node name="PathSelection" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="PathInput" type="LineEdit" parent="VBox/PathSelection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Installation Directory..."
+
+[node name="BrowseButton" type="Button" parent="VBox/PathSelection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Browse"
+
+[node name="BranchSelection" type="OptionButton" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text_overrun_behavior = 3
+item_count = 2
+selected = 0
+popup/item_0/text = "Stable (Build 41/42 Stable)"
+popup/item_0/id = 0
+popup/item_1/text = "Unstable (b42_unstable)"
+popup/item_1/id = 1
+
+[node name="StatusLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Ready to install."
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CreateButton" type="Button" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(0, 40)
+text = "Create & Install"
+
+[node name="WaitLabel" type="Label" parent="VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 18
+text = "PLEASE WAIT!"
+horizontal_alignment = 1
+
+[node name="BlinkTimer" type="Timer" parent="VBox/WaitLabel"]
+unique_name_in_owner = true
+wait_time = 0.5
+
+[node name="FileDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+title = "Open a Directory"
+initial_position = 2
+size = Vector2i(600, 400)
+ok_button_text = "Select Current Directory"
+file_mode = 2
+access = 2

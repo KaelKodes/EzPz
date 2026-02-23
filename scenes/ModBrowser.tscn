@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2x1y1y1y1y1y"]
+[ext_resource type="Script" path="res://scripts/ModBrowser.cs" id="1_modbr"]
+
+[node name="ModBrowser" type="Window"]
+script = ExtResource("1_modbr")
+title = "Steam Workshop Mod Manager"
+initial_position = 2
+size = Vector2i(600, 400)
+visible = false
+exclusive = true
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="AddModSection" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="WorkshopInput" type="LineEdit" parent="VBox/AddModSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Paste Workshop URL or ID here..."
+
+[node name="ModIdInput" type="LineEdit" parent="VBox/AddModSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Internal Mod ID (if known)..."
+
+[node name="AddButton" type="Button" parent="VBox/AddModSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Mod"
+
+[node name="ModList" type="Tree" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+column_titles_visible = true
+
+[node name="Footer" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="VBox/Footer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Close"
+
+[node name="DeleteConfirm" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Confirm Deletion"
+initial_position = 2
+size = Vector2i(300, 100)
+dialog_text = "This will permanently delete the mod files from disk. Are you sure?"
+ok_button_text = "Delete"

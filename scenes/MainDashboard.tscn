@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6j2y1y1y1y1y"]
+
+[ext_resource type="Script" path="res://scripts/MainDashboard.cs" id="1_x1x1x"]
+[ext_resource type="PackedScene" uid="uid://b2x1y1y1y1y1y" path="res://scenes/ModBrowser.tscn" id="2_modbr"]
+[ext_resource type="PackedScene" uid="uid://c3x1y1y1y1y1y" path="res://scenes/SettingsEditor.tscn" id="3_seted"]
+[ext_resource type="PackedScene" uid="uid://d4x1y1y1y1y1y" path="res://scenes/ServerSetupUI.tscn" id="4_setup"]
+[ext_resource type="PackedScene" path="res://scenes/PlayerManager.tscn" id="5_playm"]
+
+[node name="MainDashboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x1x1x")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.12, 0.14, 1)
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBox/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 24
+text = "EzPz - Project Zomboid Server Manager"
+
+[node name="StatusLabel" type="Label" parent="VBox/Header"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Status: Stopped"
+
+[node name="MainContent" type="HSplitContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+split_offset = 200
+
+[node name="Sidebar" type="VBoxContainer" parent="VBox/MainContent"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="ServerListLabel" type="Label" parent="VBox/MainContent/Sidebar"]
+layout_mode = 2
+text = "Servers"
+
+[node name="ServerList" type="ItemList" parent="VBox/MainContent/Sidebar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="NewServerButton" type="Button" parent="VBox/MainContent/Sidebar"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Add Server"
+
+[node name="SidebarButtons" type="HBoxContainer" parent="VBox/MainContent/Sidebar"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="CloneButton" type="Button" parent="VBox/MainContent/Sidebar/SidebarButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clone"
+
+[node name="DeleteButton" type="Button" parent="VBox/MainContent/Sidebar/SidebarButtons"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_hover_color = Color(1, 0.3, 0.3, 1)
+theme_override_colors/font_color = Color(1, 0.4, 0.4, 1)
+text = "Delete"
+
+[node name="DashboardView" type="VBoxContainer" parent="VBox/MainContent"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ConsoleOutput" type="RichTextLabel" parent="VBox/MainContent/DashboardView"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+
+[node name="Buttons" type="HBoxContainer" parent="VBox/MainContent/DashboardView"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsButton" type="Button" parent="VBox/MainContent/DashboardView/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Edit Settings"
+
+[node name="ModsButton" type="Button" parent="VBox/MainContent/DashboardView/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Manage Mods"
+
+[node name="PlayersButton" type="Button" parent="VBox/MainContent/DashboardView/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Manage Players"
+
+[node name="Controls" type="HBoxContainer" parent="VBox/MainContent/DashboardView"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="CommandInput" type="LineEdit" parent="VBox/MainContent/DashboardView/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Enter server command..."
+
+[node name="StartStopButton" type="Button" parent="VBox/MainContent/DashboardView/Controls"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(150, 0)
+text = "Start Server"
+
+[node name="ModBrowser" parent="." instance=ExtResource("2_modbr")]
+unique_name_in_owner = true
+visible = false
+
+[node name="SettingsEditor" parent="." instance=ExtResource("3_seted")]
+unique_name_in_owner = true
+visible = false
+
+[node name="ServerSetupUI" parent="." instance=ExtResource("4_setup")]
+unique_name_in_owner = true
+visible = false
+
+[node name="PlayerManager" parent="." instance=ExtResource("5_playm")]
+unique_name_in_owner = true
+visible = false

@@ -1,0 +1,12 @@
+# Godot-specific ignores
+.godot/
+*.uid
+
+# .NET-specific ignores
+bin/
+obj/
+*.csproj.user
+
+# OS-specific ignores
+.DS_Store
+Thumbs.db

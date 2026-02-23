@@ -1,0 +1,15 @@
+<Project Sdk="Godot.NET.Sdk/4.6.0">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework Condition=" '$(GodotTargetPlatform)' == 'android' ">net9.0</TargetFramework>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <RootNamespace>EzPz</RootNamespace>
+    <Company>Kael Kodes</Company>
+    <Product>EzPz</Product>
+    <Version>1.0.0</Version>
+    <Description>A Project Zomboid Server Management Tool</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Diagnostics.PerformanceCounter" Version="10.0.2" />
+  </ItemGroup>
+</Project>
