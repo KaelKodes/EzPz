@@ -1,0 +1,84 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7k3e2sft4a7"]
+
+[ext_resource type="Script" path="res://scripts/UpdateManager.cs" id="1_updmg"]
+
+[node name="UpdateManager" type="Window"]
+title = "Server Update Manager"
+initial_position = 2
+size = Vector2i(600, 450)
+visible = false
+exclusive = true
+script = ExtResource("1_updmg")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="BranchSection" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="VBox/BranchSection"]
+layout_mode = 2
+text = "Target Branch:"
+
+[node name="BranchSelector" type="OptionButton" parent="VBox/BranchSection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FetchButton" type="Button" parent="VBox/BranchSection"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh Branches"
+
+[node name="InfoLabel" type="Label" parent="VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Updating will validate server files. This may take a while."
+autowrap_mode = 3
+
+[node name="LogOutput" type="RichTextLabel" parent="VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+scroll_following = true
+theme_override_font_sizes/normal_font_size = 12
+
+[node name="ProgressContainer" type="VBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="VBox/ProgressContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Idle"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="VBox/ProgressContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+
+[node name="Actions" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="UpdateButton" type="Button" parent="VBox/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+custom_minimum_size = Vector2(120, 0)
+text = "Start Update"
+
+[node name="CloseButton" type="Button" parent="VBox/Actions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Close"

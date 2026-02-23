@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c3x1y1y1y1y1y" path="res://scenes/SettingsEditor.tscn" id="3_seted"]
 [ext_resource type="PackedScene" uid="uid://d4x1y1y1y1y1y" path="res://scenes/ServerSetupUI.tscn" id="4_setup"]
 [ext_resource type="PackedScene" path="res://scenes/PlayerManager.tscn" id="5_playm"]
+[ext_resource type="PackedScene" path="res://scenes/UpdateManager.tscn" id="6_updmg"]
 
 [node name="MainDashboard" type="Control"]
 layout_mode = 3
@@ -122,6 +123,11 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Manage Players"
 
+[node name="UpdateServerButton" type="Button" parent="VBox/MainContent/DashboardView/Buttons"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Update Server"
+
 [node name="Controls" type="HBoxContainer" parent="VBox/MainContent/DashboardView"]
 layout_mode = 2
 theme_override_constants/separation = 10
@@ -151,5 +157,9 @@ unique_name_in_owner = true
 visible = false
 
 [node name="PlayerManager" parent="." instance=ExtResource("5_playm")]
+unique_name_in_owner = true
+visible = false
+
+[node name="UpdateManager" parent="." instance=ExtResource("6_updmg")]
 unique_name_in_owner = true
 visible = false

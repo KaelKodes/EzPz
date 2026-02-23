@@ -182,21 +182,40 @@ public partial class ServerManager : Node
         }
 
         // Parsing "players" command response
+        // Project Zomboid outputs "Players connected (X):" followed by "- username" lines
         if (message.Contains("Players connected ("))
         {
             _awaitingPlayerList[profileName] = true;
             _pendingPlayerLists[profileName] = new List<string>();
+
+            // Check if there are 0 players immediately
+            if (message.Contains("(0)"))
+            {
+                EmitSignal(SignalName.PlayerListReceived, profileName, new string[0]);
+                _awaitingPlayerList[profileName] = false;
+            }
         }
         else if (_awaitingPlayerList.ContainsKey(profileName) && _awaitingPlayerList[profileName])
         {
-            if (message.Trim().StartsWith("- "))
+            string trimmed = message.Trim();
+            if (trimmed.StartsWith("- "))
             {
-                string username = message.Trim().Substring(2).Trim();
+                string username = trimmed.Substring(2).Trim();
                 _pendingPlayerLists[profileName].Add(username);
             }
-            else if (string.IsNullOrEmpty(message.Trim()))
+            else if (string.IsNullOrEmpty(trimmed) || trimmed.Contains("Players connected"))
             {
-                // End of list (PZ usually has an empty line after)
+                // We leave it open for now, but if we see another "Players connected" or a long time passes it might be done.
+                // However, usually PZ sends a list then a blank line.
+                if (_pendingPlayerLists[profileName].Count > 0)
+                {
+                    EmitSignal(SignalName.PlayerListReceived, profileName, _pendingPlayerLists[profileName].ToArray());
+                    _awaitingPlayerList[profileName] = false;
+                }
+            }
+            else
+            {
+                // If it's not a "- " line and we were awaiting, and it's some other server info, the list is likely done.
                 EmitSignal(SignalName.PlayerListReceived, profileName, _pendingPlayerLists[profileName].ToArray());
                 _awaitingPlayerList[profileName] = false;
             }

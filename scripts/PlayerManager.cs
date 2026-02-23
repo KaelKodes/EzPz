@@ -64,6 +64,13 @@ public partial class PlayerManager : Window
     private void RefreshList()
     {
         if (string.IsNullOrEmpty(_currentProfileName)) return;
+
+        _playerList.Clear();
+        var root = _playerList.CreateItem();
+        var loading = _playerList.CreateItem(root);
+        loading.SetText(0, "Refreshing...");
+        loading.SetText(1, "Working...");
+
         _serverManager.SendCommand(_currentProfileName, "players");
     }
 
